@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CippCodeBlock, CippOffcanvas } from 'src/components/utilities'
-import { CippDatatable } from 'src/components/tables'
+import { CellTip, CippDatatable } from 'src/components/tables'
 import {
   CCardBody,
   CButton,
@@ -18,7 +18,6 @@ import { CippPage } from 'src/components/layout'
 import { ModalService } from 'src/components/utilities'
 
 //todo: expandable with RAWJson property.
-/* eslint-disable-next-line react/prop-types */
 
 const AutopilotListTemplates = () => {
   const tenant = useSelector((state) => state.app.currentTenant)
@@ -71,19 +70,26 @@ const AutopilotListTemplates = () => {
       name: 'Display Name',
       selector: (row) => row['Displayname'],
       sortable: true,
+      cell: (row) => CellTip(row['Displayname']),
       exportSelector: 'Displayname',
+      minWidth: '400px',
+      maxWidth: '400px',
     },
     {
       name: 'Description',
       selector: (row) => row['Description'],
       sortable: true,
+      cell: (row) => CellTip(row['Description']),
       exportSelector: 'Description',
+      minWidth: '400px',
+      maxWidth: '400px',
     },
     {
       name: 'Type',
       selector: (row) => row['Type'],
       sortable: true,
       exportSelector: 'Type',
+      maxWidth: '100px',
     },
     {
       name: 'GUID',
@@ -94,6 +100,7 @@ const AutopilotListTemplates = () => {
     {
       name: 'Actions',
       cell: Offcanvas,
+      maxWidth: '100px',
     },
   ]
 
